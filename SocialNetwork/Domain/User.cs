@@ -6,9 +6,30 @@ public class User : Entity
 {
     public UserName UserName { get; private set; }
     public Birthday Birthday { get; private set; }
-
-    /*birthdate
-    publication 
-        friends*/
     
+    private List<Publication> _publications;
+    public IReadOnlyCollection<Publication> Publications => _publications.AsReadOnly();
+    
+    private List<User> _friends;
+    public IReadOnlyCollection<User> Friends => _friends.AsReadOnly();
+
+    private User() { }
+    public User(UserName userName, Birthday birthday):this()
+    {
+        Id = Guid.NewGuid();
+        UserName = userName;
+        Birthday = birthday;
+        _publications = new List<Publication>();
+        _friends = new List<User>();
+    }
+
+    public void AddFriends()
+    {
+        
+    }
+
+    public Publication AddPublication()
+    {
+        return new Publication("content", "content");
+    }
 }

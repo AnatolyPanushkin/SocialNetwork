@@ -10,9 +10,15 @@ public class Birthday:ValueObject
 
     public Birthday(DateOnly date)
     {
-        if (date > ToDateOnly(DateTime.Now))
+        var currentDate = ToDateOnly(DateTime.Now);
+        if (date > currentDate)
         {
-            throw new ArgumentException("The date cannot be longer than the current one");
+            throw new ArgumentException("Incorrect Birthdate");
+        }
+
+        if (date.Year < currentDate.Year - 100)
+        {
+            throw new ArgumentException("Incorrect Birthdate");
         }
     }
     protected override IEnumerable<object> GetEqualityComponents()
